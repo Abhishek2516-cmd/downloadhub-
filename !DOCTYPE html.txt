@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Brain AI</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body style="margin:0; font-family:Arial; background:#0f172a; color:white; text-align:center;">
+
+  <h1 style="margin-top:50px;">🤖 Brain AI</h1>
+  <p>Create images, chat, music & more</p>
+
+  <input id="input" placeholder="Ask anything..." 
+  style="padding:10px; width:250px; border:none; border-radius:5px;">
+
+  <br><br>
+
+  <button onclick="chat()" 
+  style="padding:10px 20px; background:#38bdf8; border:none; border-radius:5px; cursor:pointer;">
+  Send
+  </button>
+
+  <p id="output" style="margin-top:20px;"></p>
+
+  <script>
+    function chat() {
+      let input = document.getElementById("input").value;
+      document.getElementById("output").innerText = "AI: " + input;
+    }
+  </script>
+
+</body>
+</html>
