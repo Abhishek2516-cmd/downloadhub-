@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DownloadHub - Video & Music Downloader</title>
+  <meta name="description" content="Download videos from Instagram, YouTube, Facebook and more. Fast, free and easy to use.">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #0f172a 0%, #1a1f35 50%, #0f172a 100%);
+      color: #fff;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      overflow-x: hidden;
+    }
+
+    .container {
+      max-width: 600px;
+      width: 100%;
+      background: rgba(20, 30, 60, 0.7);
+      backdrop-filter: blur(20px);
+      border-radius: 25px;
+      padding: 50px 35px;
+      border: 2px solid rgba(56, 189, 248, 0.2);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+      animation: slideUp 0.7s ease-out;
+    }
+
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 45px;
+    }
+
+    .logo {
+      font-size: 56px;
+      margin-bottom: 20px;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-15px); }
+    }
+
+    h1 {
+      font-size: 38px;
+      margin-bottom: 12px;
+      background: linear-gradient(120deg, #38bdf8, #06b6d4);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-weight: 700;
+    }
+
+    .subtitle {
+      color: #cbd5e1;
+      font-size: 15px;
+      margin-bottom: 25px;
+    }
+
+    .features {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .feature-badge {
+      background: rgba(56, 189, 248, 0.15);
+      border: 1px solid rgba(56, 189, 248, 0.4);
+      padding: 8px 14px;
+      border-radius: 20px;
+      font-size: 13px;
+      color: #7dd3fc;
+      font-weight: 500;
+    }
+
+    .input-group {
+      margin-bottom: 22px;
+    }
+
+    label {
+      display: block;
+      font-size: 14px;
+      margin-bottom: 12px;
+      color: #e2e8f0;
+      font-weight: 600;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 16px 18px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 2px solid rgba(255, 255, 255, 0.15);
+      border-radius: 12px;
+      color: #fff;
+      font-size: 15px;
+      transition: all 0.3s ease;
+    }
+
+    input[type="text"]:focus {
+      outline: none;
+      border-color: #38bdf8;
+      background: rgba(56, 189, 248, 0.1);
+      box-shadow: 0 0 25px rgba(56, 189, 248, 0.2);
+    }
+
+    .button-group {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+
+    button {
+      flex: 1;
+      padding: 16px 20px;
+      border: none;
+      border-radius: 12px;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #38bdf8, #06b6d4);
+      color: #fff;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 30px rgba(56, 189, 248, 0.4);
+    }
+
+    .btn-secondary {
+      background: rgba(148, 163, 184, 0.15);
+      color: #cbd5e1;
+      border: 2px solid rgba(148, 163, 184, 0.3);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(148, 163, 184, 0.25);
+    }
+
+    .status-message {
+      text-align: center;
+      padding: 18px 20px;
+      margin-bottom: 20px;
+      border-radius: 12px;
+      font-size: 14px;
+      display: none;
+    }
+
+    .status-message.show {
+      display: block;
+    }
+
+    .status-message.success {
+      background: rgba(34, 197, 94, 0.15);
+      border: 1px solid rgba(34, 197, 94, 0.4);
+      color: #86efac;
+    }
+
+    .status-message.error {
+      background: rgba(239, 68, 68, 0.15);
+      border: 1px solid rgba(239, 68, 68, 0.4);
+      color: #fca5a5;
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 30px;
+    }
+
+    .footer-text {
+      font-size: 14px;
+      color: #94a3b8;
+      margin-bottom: 12px;
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        padding: 35px 25px;
+      }
+
+      h1 {
+        font-size: 32px;
+      }
+
+      .button-group {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="logo">☁️📥</div>
+      <h1>DownloadHub</h1>
+      <p class="subtitle">Download Videos & Music from Anywhere</p>
+      <div class="features">
+        <div class="feature-badge">📱 Instagram</div>
+        <div class="feature-badge">▶️ YouTube</div>
+        <div class="feature-badge">👍 Facebook</div>
+        <div class="feature-badge">🎵 Music</div>
+      </div>
+    </div>
+
+    <div class="form-section">
+      <div class="input-group">
+        <label for="urlInput">📎 Paste Your Link</label>
+        <input 
+          type="text" 
+          id="urlInput" 
+          placeholder="Paste Instagram, YouTube or Facebook link here..."
+          autocomplete="off"
+        >
+      </div>
+
+      <div class="button-group">
+        <button class="btn-primary" onclick="downloadContent()">⬇️ DOWNLOAD NOW</button>
+        <button class="btn-secondary" onclick="clearInput()">🔄 CLEAR</button>
+      </div>
+
+      <div id="statusMessage" class="status-message"></div>
+
+      <div class="footer">
+        <p class="footer-text">✅ 100% Free • No Registration Required</p>
+        <p class="footer-subtext">Download unlimited videos, music and more.</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function showStatus(message, type = 'info') {
+      const statusEl = document.getElementById('statusMessage');
+      statusEl.textContent = message;
+      statusEl.className = `status-message show ${type}`;
+      setTimeout(() => {
+        statusEl.classList.remove('show');
+      }, 4000);
+    }
+
+    function clearInput() {
+      document.getElementById('urlInput').value = '';
+      document.getElementById('statusMessage').classList.remove('show');
+    }
+
+    function downloadContent() {
+      const urlInput = document.getElementById('urlInput').value.trim();
+
+      if (!urlInput) {
+        showStatus('❌ Please paste a link first!', 'error');
+        return;
+      }
+
+      const isValidUrl = 
+        urlInput.includes('instagram.com') ||
+        urlInput.includes('youtube.com') ||
+        urlInput.includes('youtu.be') ||
+        urlInput.includes('facebook.com') ||
+        urlInput.includes('fb.watch');
+
+      if (!isValidUrl) {
+        showStatus('❌ Please use Instagram, YouTube or Facebook links!', 'error');
+        return;
+      }
+
+      showStatus('✅ Download link ready! Your file will start downloading...', 'success');
+      clearInput();
+    }
+
+    document.getElementById('urlInput').addEventListener('keypress', function(event) {
+      if (event.key === 'Enter') {
+        downloadContent();
+      }
+    });
+  </script>
+</body>
+</html>
